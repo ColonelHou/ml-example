@@ -1,3 +1,5 @@
+
+# http://yann.lecun.com/exdb/mnist/ 数据下载地址
 import os
 from matplotlib import pyplot as plt
 import numpy as np
@@ -18,7 +20,8 @@ def read_head(filename):
 	with open(filename,'rb') as pf:
 		#获取magic number
 		data = pf.read(4)#读出第1个4字节
-		magic_num = int.from_bytes(data,byteorder='big')#bytes数据大尾端模式转换为int型
+                #bytes数据大尾端模式转换为int型
+		magic_num = int.from_bytes(data,byteorder='big')
 		print('magcinum: ', hex(magic_num))
 		print('magcinum: ', magic_num)
 
@@ -32,7 +35,7 @@ def read_head(filename):
 			dms = int.from_bytes(data,byteorder='big')
 			print('dimension %d: %d'%(i,dms))
 			dimension.append(dms)
-	print(dimension)
+	print('demension => ', dimension)
 	return dimension
 '''
 功能:
@@ -44,8 +47,7 @@ dimension, read_head()返回的维度
 '''
 def get_head_length(dimension):
 	return 4*len(dimension)+4
-	
- 
+
 '''
 功能：
 读出文件中的第n张图片,mnist单张图片的数据为28*28个字节
@@ -155,27 +157,29 @@ def read_label_vector(filename,head_len,offset,amount):
 从文件中读offset起始位置开始读出amout个image和label。
 '''
 def read_image_label_vector(image_file,label_file,offset,amount):
-	image_dim = read_head(image_file)
-	label_dim = read_head(label_file)
-	#判断样本中的image和label是否一致
-        # 获取样本数量
-	image_amount = get_sample_count(image_dim)
-	label_amount = get_sample_count(label_dim)
-	if image_amount != label_amount:
-		print('Error:训练集image和label数量不相等')
-		return None
-	if offset+amount > image_amount:
-		print('Error:请求的数据超出样本数量')
-		return None
-
-	#获取样本image和label的头文件长度
-	image_head_len = get_head_length(image_dim)
-	label_head_len = get_head_length(label_dim)
-
-	#得到image和label的向量
-	image_mat = read_image_vector(image_file,image_head_len,offset,amount)
-	label_list = read_label_vector(label_file,label_head_len,offset,amount)
-	return image_mat,label_list
+    image_dim = read_head(image_file)
+    label_dim = read_head(label_file)
+    print('image_dim -> ', image_dim)
+    print('label_dim -> ', label_dim)
+    #判断样本中的image和label是否一致
+    # 获取样本数量 分别是10000
+    image_amount = get_sample_count(image_dim)
+    label_amount = get_sample_count(label_dim)
+    if image_amount != label_amount:
+        print('Error:训练集image和label数量不相等')
+        return None
+    if offset+amount > image_amount:
+        print('Error:请求的数据超出样本数量')
+        return None
+    #获取样本image和label的头文件长度
+    image_head_len = get_head_length(image_dim)
+    label_head_len = get_head_length(label_dim)
+    print('image_head_len --> ', image_head_len)
+    print('labele_head_len ===> ', label_head_len)
+    #得到image和label的向量
+    image_mat = read_image_vector(image_file,image_head_len,offset,amount)
+    label_list = read_label_vector(label_file,label_head_len,offset,amount)
+    return image_mat,label_list
 
 if __name__ == '__main__':
 	print('\n\n')
