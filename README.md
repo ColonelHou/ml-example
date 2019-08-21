@@ -4,5 +4,5 @@
 ```bash
 $ pip3.7 install wheel
 
-mnist
+mnist demo
 ```
