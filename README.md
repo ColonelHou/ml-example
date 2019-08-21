@@ -5,4 +5,5 @@
 $ pip3.7 install wheel
 
 mnist demo
+rebase
 ```
