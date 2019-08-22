@@ -1,9 +1,0 @@
-" Press ? for help
-
-.. (up a dir)
-</git/ml-example/
-▸  liner_regression/
-▸  mnist/
-▸  tf/
-   demo.py
-   README.md
