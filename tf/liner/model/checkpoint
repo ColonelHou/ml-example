@@ -1,2 +1,2 @@
-model_checkpoint_path: "liner"
-all_model_checkpoint_paths: "liner"
+model_checkpoint_path: "liner_sec"
+all_model_checkpoint_paths: "liner_sec"

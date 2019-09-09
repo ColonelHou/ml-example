@@ -2,6 +2,8 @@
 import tensorflow as tf
 import numpy as np
 
+
+
 print('===============')
 # 使用numpy随机生成100个点
 x = np.random.rand(100)
@@ -45,4 +47,4 @@ with tf.Session() as sess:
         # 每训练20次打印K，b
         if step%20 == 0:
             print(step, sess.run([k, b]))
-    saver.save(sess, './tf/liner/model/liner')
+    saver.save(sess, './tf/liner/model/liner_sec')
